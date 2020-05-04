@@ -28,14 +28,7 @@ def parse_subject_info():
         subjects = json.load(f)
 
     for faculty in subjects:
-        faculty_courses = []
-        for subject in subjects[faculty]:
-            faculty_courses.append({
-                "code": subject[0],
-                "name": subject[1],
-                "uoc": subject[2] 
-            })
-        subject_info[faculty] = faculty_courses
+        subject_info[faculty] = subjects[faculty]
         subject_info["faculties"].add(faculty)
 
     return subject_info
