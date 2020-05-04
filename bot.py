@@ -1,9 +1,12 @@
 import discord 
+import json
 from discord.ext import commands
 from commands import search
 
-TOKEN = ""
-BOT = commands.Bot('--')
+with open('config.json', 'r') as f:
+    config = json.load(f)
+TOKEN = config['token']
+BOT = commands.Bot(config['prefix'])
 
 @BOT.event
 async def on_ready():
