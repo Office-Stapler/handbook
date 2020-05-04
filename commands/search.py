@@ -8,6 +8,20 @@ HANDBOOK_URL = 'https://www.handbook.unsw.edu.au/undergraduate/courses/2020/'
 
 
 def parse_subject_info():
+    """Parses the course information from JSON into a Python dict.
+
+    Returns:
+        array[array[dict]]: [{
+            faculty_name: [
+                {
+                    "code": 8 character course code,
+                    "name": Full course name,
+                    "uoc": Unit of credits
+                }
+            ]
+        }]
+    """
+
     subject_info = {"faculties": set()}
 
     with open('subjectinfo.json', 'r') as f:
@@ -28,11 +42,15 @@ def parse_subject_info():
 
 
 def get_handbook_details(query):
+    """Gets a more detailed description of a course from the handbook. 
+
+    Args:
+        query (str) - course code (possibly partial) to search the handbook.
+
+    Returns:
+        tuple: (overview, offering)
     """
-    Arguments: query - A string that will be used to search the handbook
-    Return:
-    Tuple: (overview, offering)
-    """
+
     page = requests.get(HANDBOOK_URL + query).text
     soup = bs4.BeautifulSoup(page, 'html.parser')
     info = soup.find_all('div', class_='readmore__wrapper')
@@ -49,15 +67,18 @@ def get_handbook_details(query):
 
 def search(query):
     ''' 
-        Arguments: query - A string that will be used to search the handbook
-        Return: 
-        Dictionary {
+    Args:
+        query (str) - course code (possibly partial) to search the handbook.
+    
+    Returns: 
+        dict: {
             'overview': Course overview,
             'terms': Course offering terms,
             'name': Course name
         }
-        If the subject faculty code is not found it returns None,
-        if the subject faculty code is found but the course code isn't it returns the list of courses
+
+        None if faculty code is not found.
+        list if faculty code found, but course code not found.
     '''
 
     query = query.upper()
