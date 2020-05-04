@@ -86,8 +86,7 @@ def search(query):
         return None
     
     if query not in [subject["code"] for subject in subjects[faculty_code]]:
-        return [(subject["code"], subject["name"], subject["uoc"])
-                for subject in subjects[faculty_code]]
+        return [subject["code"] for subject in subjects[faculty_code]]
         
     for subject in subjects[faculty_code]:
         if subject["code"] == query:
