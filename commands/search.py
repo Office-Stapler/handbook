@@ -4,14 +4,14 @@ import requests
 
 def search(query):
     ''' 
-        Arguments: query - A string that will be used to search the handbook \n
+        Arguments: query - A string that will be used to search the handbook
         Return: 
         Dictionary {
             'overview': Course overview,
             'terms': Course offering terms,
             'name': Course name
-        } \n
-        If the subject faculty code is not found it returns None, \n
+        }
+        If the subject faculty code is not found it returns None,
         if the subject faculty code is found but the course code isn't it returns the list of courses
     '''
     query = query.upper()

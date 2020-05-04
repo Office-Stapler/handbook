@@ -1,29 +1,25 @@
 import discord 
 from discord.ext import commands
 from commands import search
-token = ''
 
+TOKEN = ""
+BOT = commands.Bot('--')
 
-
-
-
-Bot = commands.Bot('--')
-
-@Bot.event
+@BOT.event
 async def on_ready():
     print('-----------------------')
     print(f'     Logged in')
     print('-----------------------')
 
-@Bot.command(name='search')
+@BOT.command(name='search')
 async def search_code(ctx, subject):
     info = search.search(subject)
-    if info == None:
+    if not info:
         await ctx.send('Please enter a valid course code!')
     elif isinstance(info, list):
         e = discord.Embed(
-            title=f'Couldn\'t find {subject}, but we found courses within the faculty',
-            description=str([x[0] for x in info]).replace('\'', ''),
+            title=f"Couldn't find {subject}, but we found courses within the faculty",
+            description=str([x[0] for x in info]).replace("'", ''),
             colour=0xFFFF00
         )
         await ctx.send(embed=e)
@@ -35,4 +31,6 @@ async def search_code(ctx, subject):
         )
         e.add_field(name='Offering Terms', value=info['terms'])
         await ctx.send(embed=e)
-Bot.run(token)
+
+if __name__ == "__main__":
+    BOT.run(TOKEN)
