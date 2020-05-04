@@ -22,7 +22,7 @@ async def search_code(ctx, subject):
     elif isinstance(info, list):
         e = discord.Embed(
             title=f"Couldn't find {subject}, but we found courses within the faculty",
-            description=str([x[0] for x in info]).replace("'", ''),
+            description=str(info).replace("'", ''),
             colour=0xFFFF00
         )
         await ctx.send(embed=e)
