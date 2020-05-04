@@ -1,13 +1,12 @@
 import discord 
+import json
 from discord.ext import commands
 from commands import search
-token = ''
 
-
-
-
-
-Bot = commands.Bot('--')
+with open('config.json', 'r') as f:
+    config = json.load(f)
+token = config['token']
+Bot = commands.Bot(config['prefix'])
 
 @Bot.event
 async def on_ready():
