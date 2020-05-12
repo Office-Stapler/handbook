@@ -43,11 +43,11 @@ def get_handbook_details(query):
     Returns:
         tuple: (overview, offering)
     """
-
+    url = UGRAD_URL + query
     page = requests.get(UGRAD_URL + query)
     if page.status_code != 200:
         page = requests.get(PGRAD_URL + query)
-    
+        url = PGRAD_URL + query
     soup = bs4.BeautifulSoup(page.text, 'html.parser')
     #print(soup.get_text())
     info = soup.find_all('div', class_='readmore__wrapper')
@@ -61,7 +61,7 @@ def get_handbook_details(query):
             offering = offer.get_text()
             break
     
-    return overview, offering
+    return overview, offering, url
 
 
 def search(query):
@@ -99,11 +99,12 @@ def search(query):
             name = subject["name"]
             prereq = subject['prereq']
 
-    overview, offering = get_handbook_details(query)
+    overview, offering, url = get_handbook_details(query)
 
     return {
         'overview': overview,
         'terms': offering,
         'name': name,
-        'prereq': prereq
+        'prereq': prereq,
+        'url': url
     }

@@ -30,10 +30,11 @@ async def search_code(ctx, subject):
         e = discord.Embed(
             title=f'About {subject.upper()}: {info["name"]}',
             description=info['overview'],
-            colour=discord.Color(0x000ff)
+            colour=discord.Color(0x000ff),
+            url=info['url']
         )
-        e.add_field(name='Offering Terms', value=info['terms'])
-        e.add_field(name='Conditions for Enrolment', value='None' if info['prereq'] == [] else info['prereq'])
+        e.add_field(name='Offering Terms', value=info['terms'], inline=False)
+        e.add_field(name='Conditions for Enrolment', value='None' if info['prereq'] == [] else info['prereq'], inline=False)
         await ctx.send(embed=e)
 
 @BOT.command(name='results')
