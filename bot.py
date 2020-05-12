@@ -33,7 +33,7 @@ async def search_code(ctx, subject):
             colour=discord.Color(0x000ff)
         )
         e.add_field(name='Offering Terms', value=info['terms'])
-        e.add_field(name='Conditions for Enrolment', value='None found' if info['prereq'] == [] else info['prereq'][0])
+        e.add_field(name='Conditions for Enrolment', value='None' if info['prereq'] == [] else info['prereq'])
         await ctx.send(embed=e)
 
 @BOT.command(name='results')

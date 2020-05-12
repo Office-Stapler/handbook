@@ -4,8 +4,8 @@ import requests
 
 SUBJECT_INFO = {}
 
-HANDBOOK_URL = 'https://www.handbook.unsw.edu.au/undergraduate/courses/2020/'
-
+UGRAD_URL = 'https://www.handbook.unsw.edu.au/undergraduate/courses/2020/'
+PGRAD_URL = 'https://www.handbook.unsw.edu.au/postgraduate/courses/2020/'
 
 def parse_subject_info():
     """Parses the course information from JSON into a Python dict.
@@ -44,10 +44,16 @@ def get_handbook_details(query):
         tuple: (overview, offering)
     """
 
-    page = requests.get(HANDBOOK_URL + query).text
-    soup = bs4.BeautifulSoup(page, 'html.parser')
+    page = requests.get(UGRAD_URL + query)
+    if page.status_code != 200:
+        page = requests.get(PGRAD_URL + query)
+    
+    soup = bs4.BeautifulSoup(page.text, 'html.parser')
+    #print(soup.get_text())
     info = soup.find_all('div', class_='readmore__wrapper')
+    #print(info)  
     overview = info[0].get_text().strip()
+    
     offering = soup.find_all('p', class_='')
 
     for offer in offering:
