@@ -2,8 +2,9 @@ import discord
 import json
 from discord.ext import commands
 from commands import code
-from commands import countdown
 from commands import search
+from commands import timetable
+
 with open('config.json', 'r') as f:
     config = json.load(f)
 TOKEN = config['token']
@@ -54,5 +55,39 @@ async def serach_name(ctx, subject):
             await ctx.send(embed=e)
         except discord.HTTPException:
             await ctx.send('Your search was too vague, please be more specific')
+
+@BOT.command(name='timetable')
+async def find_times(ctx, *courseperiod):
+    try:
+        period = courseperiod[1].upper()
+        subject = courseperiod[0].upper()
+        times = timetable.timetable(subject)
+    except:
+        await ctx.send('Invalid format, please do coursecode period. E.g: COMP2511 T3')
+        return
+    info = times[period]
+    if not info:
+        await ctx.send(f"Course code is wrong or the course doesn't run in {period}")
+        return
+    types = [
+    'Activity',	
+    'Period',
+    'Class',
+    'Section Status',
+    'Enrols/Capacity',
+	'Day/Start Time'
+    ]
+    e = discord.Embed(
+        title=f'About {subject} in {period}',
+        url=f'http://timetable.unsw.edu.au/2020/{subject.upper()}.html#S{period[1]}'
+    )
+    for time in info:
+        if len(types) == len(time):
+            e.add_field(
+                name = time[0],
+                value = f'{time[5]}\nStatus: {time[3]}'
+            )
+    await ctx.send(embed=e)
+
 if __name__ == "__main__":
     BOT.run(TOKEN)
