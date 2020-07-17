@@ -54,11 +54,5 @@ async def serach_name(ctx, subject):
             await ctx.send(embed=e)
         except discord.HTTPException:
             await ctx.send('Your search was too vague, please be more specific')
-
-@BOT.command(name='results')
-async def get_time(ctx):
-    diff = countdown.countdown()
-    if diff.days > 0:
-        await ctx.send(f'There are {diff.days} days left')
 if __name__ == "__main__":
     BOT.run(TOKEN)
