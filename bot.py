@@ -4,6 +4,8 @@ from discord.ext import commands
 from commands import code
 from commands import search
 from commands import timetable
+from commands import plan
+
 
 with open('config.json', 'r') as f:
     config = json.load(f)
@@ -15,6 +17,7 @@ async def on_ready():
     print('-----------------------')
     print(f'     Logged in')
     print('-----------------------')
+
 
 @BOT.command(name='code')
 async def search_code(ctx, subject):
@@ -40,13 +43,14 @@ async def search_code(ctx, subject):
         await ctx.send(embed=e)
 
 @BOT.command(name='search')
-async def serach_name(ctx, subject):
-    info = search.name_search(subject)
+async def serach_name(ctx, *subject):
+    name = ' '.join(subject)
+    info = search.name_search(name)
     if not info:
         await ctx.send(f'No courses were found with the name {subject}')
     else:
         e = discord.Embed(
-            title=f'List of subjects with {subject.capitalize()}',
+            title=f'List of subjects with {name.capitalize()}',
             colour=discord.Color(0x000ff),
         )
         for subject in info:
@@ -55,6 +59,56 @@ async def serach_name(ctx, subject):
             await ctx.send(embed=e)
         except discord.HTTPException:
             await ctx.send('Your search was too vague, please be more specific')
+
+@BOT.command(name='plan')
+async def command_plan(ctx, *args):
+    if len(args) < 3:
+        await ctx.send('Please enter a command, subject and a time e.g (&plan add math1231 21t3')
+        return
+    
+    command, subject, time = args
+    try:
+        time = time[:2] + 'T' + time[3:]
+    except:
+        await ctx.send('Invalid Time')
+        return
+    commands = {'add': plan.add_subject,
+                'remove': plan.remove_subject
+    }
+
+    if command not in commands:
+        await ctx.send('Invalid command, only have "add" or "remove".')
+        return
+    
+    return_code = commands[command](subject.upper(), time.upper(), str(ctx.message.author.id))
+    await ctx.send(plan.codes[return_code])
+
+@BOT.command(name='getsubjects')
+async def getsubjects(ctx, *args):
+    size = len(args)
+    if not 1 <= size <= 2:
+        await ctx.send('Invalid syntax, it is &getsubjects time mention e.g &getsubjects 20t1 @office_stapler')
+        return
+    subjects = None
+    name = ctx.message.author.id
+    if size == 2:
+        time, name = args
+        name = name.replace('<', '').replace('>', '').replace('@', '').replace('!', '')
+    else:
+        time = args[0]
+    subjects = plan.get_subjects(time.upper(), str(name))
+    print(time)
+    e = discord.Embed(
+        title=f'Subjects for {time.upper()}',
+    )
+    if not subjects:
+        await ctx.send("Can't find subjects or person :/")
+        return
+
+    for subject in subjects:
+        e.add_field(name = 'Name:', value = subject, inline=True)
+    
+    await ctx.send(embed=e)
 
 @BOT.command(name='timetable')
 async def find_times(ctx, *courseperiod):

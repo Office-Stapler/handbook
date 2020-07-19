@@ -4,7 +4,7 @@ subjects = None
 def name_search(name):
     global subjects
     if not subjects:
-        with open('../subjectinfo.json', 'r') as f:
+        with open('subjectinfo.json', 'r') as f:
             subjects = json.load(f)
     found = []
     for faculty in subjects:
