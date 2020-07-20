@@ -110,6 +110,33 @@ async def getsubjects(ctx, *args):
     
     await ctx.send(embed=e)
 
+@BOT.command(name='getyear')
+async def getyear(ctx, *args):
+    size = len(args)
+    if not 1 <= size <= 2:
+        await cts.send('Invalid number of arguments')
+
+    if size == 2:
+        year, name = args
+        name = name.replace('<', '').replace('>', '').replace('@', '').replace('!', '')
+    else:
+        year = args[0]
+        name = ctx.message.author.id
+    print(name)
+    subjects = plan.get_subjects_year(year, str(name))
+    if not subjects:
+        await ctx.send('Invalid year or person not found!')
+        return
+    
+    e = discord.Embed(
+        titile=f'Subjects in 20{year}'
+    )
+
+    for subject in subjects:
+        e.add_field(name=subject,
+                   value = '\n'.join(subjects[subject]))
+    await ctx.send(embed=e)
+
 @BOT.command(name='timetable')
 async def find_times(ctx, *courseperiod):
     try:

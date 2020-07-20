@@ -93,4 +93,23 @@ def get_subjects(time, name):
     
     return planner[name][time]
 
+def get_subjects_year(year, name):
+    if len(year) != 2:
+        return []
+    with open('data/timetables.json', 'r') as f:
+        planner = json.load(f)
+    
+    if name not in planner:
+        return []
+
+    subjects = {
+
+    }
+    for term in planner[name]:
+        if term.startswith(year):
+            subjects[term] = planner[name][term]
+
+    return subjects
+
+    
 
