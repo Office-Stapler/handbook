@@ -4,8 +4,22 @@ import requests
 
 SUBJECT_INFO = {}
 
-UGRAD_URL = 'https://www.handbook.unsw.edu.au/undergraduate/courses/2020/'
+UGRAD_API = 'https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:undergraduate%20+unsw_psubject.implementationYear:2020%20+unsw_psubject.code:'
+PGRAD_API = "https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:postgraduate%20+unsw_psubject.implementationYear:2020%20+unsw_psubject.code:"
+
+UGRAD_URL = "https://www.handbook.unsw.edu.au/undergraduate/courses/2020/"
 PGRAD_URL = 'https://www.handbook.unsw.edu.au/postgraduate/courses/2020/'
+
+
+class InvalidRequestException(Exception):
+    pass
+
+def find_prereq(prereqs):
+    finalList = []
+    for prereq in prereqs:
+        soup = bs4.BeautifulSoup(prereq["description"], 'html.parser')
+        finalList.append(soup.getText())
+    return finalList
 
 def parse_subject_info():
     """Parses the course information from JSON into a Python dict.
@@ -24,7 +38,7 @@ def parse_subject_info():
 
     subject_info = {"faculties": set()}
 
-    with open('subjectinfo.json', 'r') as f:
+    with open('data/subjectinfo.json', 'r') as f:
         subjects = json.load(f)
 
     for faculty in subjects:
@@ -41,28 +55,27 @@ def get_handbook_details(query):
         query (str) - course code (possibly partial) to search the handbook.
 
     Returns:
-        tuple: (overview, offering)
+        tuple: (name, overview, offering, url, prereqs)
     """
-    url = UGRAD_URL + query
-    page = requests.get(UGRAD_URL + query)
-    if page.status_code != 200:
-        page = requests.get(PGRAD_URL + query)
-        url = PGRAD_URL + query
-    soup = bs4.BeautifulSoup(page.text, 'html.parser')
-    #print(soup.get_text())
-    info = soup.find_all('div', class_='readmore__wrapper')
-    #print(info)  
-    overview = info[0].get_text().strip()
-    
-    offering = soup.find_all('p', class_='')
+    url = UGRAD_API + query.upper()
+    rq = requests.get(url)
+    full = rq.json()["contentlets"]
+    if len(full) == 0:
+        raise InvalidRequestException("Invalid course code")
 
-    for offer in offering:
-        if 'Term' in offer.get_text():
-            offering = offer.get_text()
-            break
+    details = json.loads(full[0]["data"])
     
-    return overview, offering, url
+    name = details["title"]
 
+    soup = bs4.BeautifulSoup(details["description"], 'html.parser')
+    overview = soup.getText()
+
+    offering = details["offering_detail"]
+    terms = list(map(str.strip, offering["offering_terms"].split(',')))
+    terms.sort()
+
+    prereqs = find_prereq(details["enrolment_rules"])
+    return (name, overview, terms, UGRAD_URL + query, prereqs)
 
 def search(query):
     ''' 
@@ -93,13 +106,11 @@ def search(query):
     
     if query not in [subject["code"] for subject in subjects[faculty_code]]:
         return [subject["code"] for subject in subjects[faculty_code]]
-        
-    for subject in subjects[faculty_code]:
-        if subject["code"] == query:
-            name = subject["name"]
-            prereq = subject['prereq']
 
-    overview, offering, url = get_handbook_details(query)
+    try:
+        name, overview, offering, url, prereq = get_handbook_details(query)
+    except InvalidRequestException:
+        return []
 
     return {
         'overview': overview,
@@ -108,3 +119,6 @@ def search(query):
         'prereq': prereq,
         'url': url
     }
+
+if __name__ == '__main__':
+    print(search("comp2521"))

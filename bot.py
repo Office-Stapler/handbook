@@ -24,7 +24,7 @@ async def search_code(ctx, subject):
     info = code.search(subject)
     if not info:
         await ctx.send('Please enter a valid course code!')
-    elif isinstance(info, list):
+    elif info is []:
         e = discord.Embed(
             title=f"Couldn't find {subject}, but we found courses within the faculty",
             description=str(info).replace("'", ''),
