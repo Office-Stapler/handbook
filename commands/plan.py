@@ -21,13 +21,15 @@ codes = {
     -3: 'Too many subjects',
     -4: 'Subject not found',
     -5: 'Subject already added for this term',
+    -6: 'Too many characters',
     0: 'Success',
     1:'Person had been added'
 }
 def add_subject(subject, time, name):
     if not verify_time(time):
         return -1
-
+    if len(subject) > 8:
+        return -6
     with open('data/timetables.json', 'r') as f:
         planner = json.load(f)
     return_code = -3
