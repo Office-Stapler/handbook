@@ -4,7 +4,7 @@ import requests
 
 SUBJECT_INFO = {}
 
-UGRAD_API = 'https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:undergraduate%20+unsw_psubject.implementationYear:2020%20+unsw_psubject.code:'
+API_SUFFIX = '%20+unsw_psubject.implementationYear:2020%20+unsw_psubject.code:'
 PGRAD_API = "https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:postgraduate%20+unsw_psubject.implementationYear:2020%20+unsw_psubject.code:"
 
 UGRAD_URL = "https://www.handbook.unsw.edu.au/undergraduate/courses/2020/"
@@ -47,8 +47,7 @@ def parse_subject_info():
 
     return subject_info
 
-
-def get_handbook_details(query):
+def get_handbook_details(query, level):
     """Gets a more detailed description of a course from the handbook. 
 
     Args:
@@ -57,12 +56,15 @@ def get_handbook_details(query):
     Returns:
         tuple: (name, overview, offering, url, prereqs)
     """
-    url = UGRAD_API + query.upper()
+    prefix = f"https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:{level}"
+    url = prefix + API_SUFFIX + query.upper() 
     rq = requests.get(url)
     full = rq.json()["contentlets"]
     if len(full) == 0:
+        if level != 'postgraduate':
+            return get_handbook_details(query, 'postgraduate')
         raise InvalidRequestException("Invalid course code")
-
+    
     details = json.loads(full[0]["data"])
     
     name = details["title"]
@@ -75,7 +77,7 @@ def get_handbook_details(query):
     terms.sort()
 
     prereqs = find_prereq(details["enrolment_rules"])
-    return (name, overview, terms, UGRAD_URL + query, prereqs)
+    return (name, overview, ", ".join(terms), UGRAD_URL + query, prereqs)
 
 def search(query):
     ''' 
@@ -108,7 +110,7 @@ def search(query):
         return [subject["code"] for subject in subjects[faculty_code]]
 
     try:
-        name, overview, offering, url, prereq = get_handbook_details(query)
+        name, overview, offering, url, prereq = get_handbook_details(query, 'undergraduate')
     except InvalidRequestException:
         return []
 
@@ -121,4 +123,4 @@ def search(query):
     }
 
 if __name__ == '__main__':
-    print(search("dcsdcdkop"))
+    print(search("comp2521"))
