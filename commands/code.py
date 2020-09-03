@@ -121,4 +121,4 @@ def search(query):
     }
 
 if __name__ == '__main__':
-    print(search("comp2521"))
+    print(search("dcsdcdkop"))
