@@ -17,7 +17,7 @@ async def on_ready():
     print('-----------------------')
     print(f'     Logged in')
     print('-----------------------')
-
+HANDBOOK_URL = "https://www.handbook.unsw.edu.au"
 
 @BOT.command(name='code')
 async def search_code(ctx, subject):
@@ -38,8 +38,13 @@ async def search_code(ctx, subject):
             colour=discord.Color(0x000ff),
             url=info['url']
         )
-        e.add_field(name='Offering Terms', value=info['terms'], inline=False)
+        e.add_field(name='Offering Terms', value=info['terms'] if info["terms"] else "N/A", inline=False)
         e.add_field(name='Conditions for Enrolment', value='None' if info['prereq'] == [] else info['prereq'], inline=False)
+        for eqv in info["equivalents"]:
+            value = f'Name: {eqv[0]}'
+            value += f'\nCode: {eqv[2]}'
+            value += f'\nURL: {HANDBOOK_URL + eqv[1]}'
+            e.add_field(name="Equivalent Course", value=value)
         await ctx.send(embed=e)
 
 @BOT.command(name='search')

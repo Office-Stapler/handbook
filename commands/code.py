@@ -50,11 +50,11 @@ def get_handbook_details(query, level):
         query (str) - course code (possibly partial) to search the handbook.
 
     Returns:
-        tuple: (name, overview, offering, url, prereqs)
+        tuple: (name, overview, offering, url, prereqs, equivalents)
     """
     prefix = f"https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:{level}"
     url = prefix + API_SUFFIX + query.upper()
-    handbook_URL = f"https://www.handbook.unsw.edu.au/{level}/courses/2020/"
+    handbook_URL = f"https://www.handbook.unsw.edu.au"
     rq = requests.get(url)
     full = rq.json()["contentlets"]
     if len(full) == 0:
@@ -65,7 +65,7 @@ def get_handbook_details(query, level):
         raise InvalidRequestException("Invalid course code")
     
     details = json.loads(full[0]["data"])
-    
+
     name = details["title"]
 
     soup = bs4.BeautifulSoup(details["description"], 'html.parser')
@@ -74,9 +74,16 @@ def get_handbook_details(query, level):
     offering = details["offering_detail"]
     terms = list(map(str.strip, offering["offering_terms"].split(',')))
     terms.sort()
-
     prereqs = find_prereq(details["enrolment_rules"])
-    return (name, overview, ", ".join(terms), handbook_URL + query, prereqs)
+
+    equivalents = []
+    for equivalent in details["eqivalents"]:
+        eqv_title = equivalent["assoc_title"]
+        eqv_url = equivalent["assoc_url"]
+        eqv_code = equivalent["assoc_code"]
+        equivalents.append((eqv_title, eqv_url, eqv_code))
+
+    return (name, overview, ", ".join(terms), handbook_URL + full[0]["urlMap"], prereqs, equivalents)
 
 def search(query):
     ''' 
@@ -106,7 +113,7 @@ def search(query):
         return None
 
     try:
-        name, overview, offering, url, prereq = get_handbook_details(query, 'undergraduate')
+        name, overview, offering, url, prereq, equivalents = get_handbook_details(query, 'undergraduate')
     except InvalidRequestException:
         return [subject["code"] for subject in subjects[faculty_code]]
 
@@ -115,8 +122,9 @@ def search(query):
         'terms': offering,
         'name': name,
         'prereq': prereq,
-        'url': url
+        'url': url,
+        'equivalents': equivalents
     }
 
 if __name__ == '__main__':
-    print(search("ACCT5001"))
+    print(get_handbook_details("ACCT1501", 'undergraduate'))
