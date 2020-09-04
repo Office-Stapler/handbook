@@ -1,0 +1,439 @@
+{
+    "published_in_handbook": {
+        "label": "Yes",
+        "value": "1"
+    },
+    "implementation_year": "2020",
+    "duration_ft_max": "",
+    "asced_detailed": {
+        "value": "",
+        "cl_id": null,
+        "key": "display_value"
+    },
+    "study_level": [
+        {
+            "label": "Undergraduate",
+            "value": "ugrd"
+        }
+    ],
+    "status": {
+        "label": "Approved",
+        "value": "Active"
+    },
+    "duration_pt_max": "",
+    "duration_pt_std": "",
+    "credit_points": "6",
+    "parent_id": {
+        "value": "Master Record: V1_065183",
+        "cl_id": "465733badb0f1380038cc4048a96193f",
+        "key": "code",
+        "type": "x_f5sl_cl_master_record"
+    },
+    "start_date": "",
+    "active": "true",
+    "cl_code": "V1_COMP2521",
+    "academic_calendar_type": {
+        "value": "",
+        "cl_id": null,
+        "key": "name"
+    },
+    "academic_org": {
+        "value": "School of Computer Science and Engineering",
+        "cl_id": "1a3a1d4f4f4d97404aa6eb4f0310c780",
+        "key": "name"
+    },
+    "sms_version": "",
+    "uac_code": "",
+    "keywords": "Computer Science,  programming,  computing,  data structures,  complexity",
+    "duration_pt_min": "",
+    "title": "Data Structures and Algorithms",
+    "effective_date": "2020-01-01",
+    "delivery_method": {
+        "label": "Fully on-site",
+        "value": "Fully on-site"
+    },
+    "duration_ft_std": "",
+    "version": "4",
+    "duration_ft_min": "",
+    "duration_ft_period": {
+        "label": null,
+        "value": null
+    },
+    "asced_narrow": {
+        "value": "",
+        "cl_id": null,
+        "key": "display_value"
+    },
+    "subclass": {
+        "label": null,
+        "value": null
+    },
+    "type": {
+        "label": null,
+        "value": null
+    },
+    "version_name": "",
+    "pre_requisites": "",
+    "cl_id": "ee28e705db57770069fd384f7c961955",
+    "parent_academic_org": {
+        "value": "Faculty of Engineering",
+        "cl_id": "5fa56ceb4f0093004aa6eb4f0310c7af",
+        "key": "name"
+    },
+    "content": null,
+    "collaborating_disciplines": [],
+    "overview": "",
+    "end_date": "",
+    "duration_pt_period": {
+        "label": null,
+        "value": null
+    },
+    "contact_hours": "7",
+    "asced_broad": {
+        "value": "020000 Information Technology",
+        "cl_id": "cd74ce13db96df002e4c126b3a96194f",
+        "key": "display_value"
+    },
+    "unit_learning_outcomes": [],
+    "hb_entries": [
+        {
+            "html": null,
+            "status": {
+                "label": null,
+                "value": null
+            },
+            "cl_id": "ba28e705db57770069fd384f7c96197c",
+            "value2": "",
+            "link_url": "http://www.cse.unsw.edu.au/~cs2521/",
+            "academic_item": {
+                "value": "V1_COMP2521",
+                "cl_id": "ee28e705db57770069fd384f7c961955",
+                "key": "code"
+            },
+            "hbeorder": "1",
+            "text": "COMP2521 Course Outline",
+            "hbetype": {
+                "label": "Link",
+                "value": "link"
+            },
+            "handbook_entry_field_content": "",
+            "heading": "",
+            "category": {
+                "label": null,
+                "value": null
+            },
+            "value1": "",
+            "handbook_code": "sample_subject"
+        }
+    ],
+    "school_detail": [
+        {
+            "cl_id": "1a3a1d4f4f4d97404aa6eb4f0310c780",
+            "published_in_handbook": {
+                "label": "Yes",
+                "value": "1"
+            },
+            "name": "School of Computer Science and Engineering",
+            "ext_id": "COMPSC",
+            "active": "true",
+            "parent": {
+                "value": "Faculty of Engineering",
+                "cl_id": "5fa56ceb4f0093004aa6eb4f0310c7af",
+                "key": "name"
+            },
+            "code": "COMPSC",
+            "description": "",
+            "url": "http://www.cse.unsw.edu.au/",
+            "name_url": "School of Computer Science and Engineering",
+            "name_no_url": ""
+        }
+    ],
+    "hb_delivery_variations": [],
+    "enrolment_rules": [
+        {
+            "active": "true",
+            "academic_item": {
+                "value": "V1_COMP2521",
+                "cl_id": "ee28e705db57770069fd384f7c961955",
+                "key": "code"
+            },
+            "type": {
+                "label": "Enrolment Requirements",
+                "value": "info"
+            },
+            "order": "",
+            "cl_id": "ae28e705db57770069fd384f7c961956",
+            "description": "Prerequisite: COMP1511 or DPST1091 or COMP1917 or COMP1921<br/><br/>"
+        }
+    ],
+    "faculty_detail": [
+        {
+            "cl_id": "5fa56ceb4f0093004aa6eb4f0310c7af",
+            "published_in_handbook": {
+                "label": "Yes",
+                "value": "1"
+            },
+            "name": "Faculty of Engineering",
+            "ext_id": "ENG",
+            "active": "true",
+            "parent": {
+                "value": "",
+                "cl_id": null,
+                "key": "name"
+            },
+            "code": "ENG",
+            "description": "Offering 60 years of excellence in developing socially engaged engineers, developing new technologies and solutioning problems of global relevance.",
+            "url": "http://www.eng.unsw.edu.au",
+            "name_url": "Faculty of Engineering",
+            "name_no_url": ""
+        }
+    ],
+    "requisites": [],
+    "unit_offering": [
+        {
+            "fees_domestic": "5970",
+            "publish": "true",
+            "location": {
+                "value": "Kensington",
+                "cl_id": "6a49b4034f4d97404aa6eb4f0310c79b",
+                "key": "name"
+            },
+            "name": "Term 2 2020",
+            "clarification_to_appear_in_handbook": "",
+            "display_name": "Term 2 2020 - 1",
+            "teaching_period": {
+                "value": "Term 2",
+                "cl_id": "03067bf7db7993009c2c403c3a961997",
+                "key": "name"
+            },
+            "attendance_mode": {
+                "value": "",
+                "cl_id": null,
+                "key": "description"
+            },
+            "quota_number": "",
+            "study_level": {
+                "label": "Undergraduate",
+                "value": "ugrd"
+            },
+            "self_enrol": "true",
+            "academic_item": {
+                "value": "V1_COMP2521",
+                "cl_id": "ee28e705db57770069fd384f7c961955",
+                "key": "code"
+            },
+            "fees_commonwealth": "1191",
+            "fees_international": "5970",
+            "course_restrictions": "",
+            "cl_id": "2628e705db57770069fd384f7c961958"
+        },
+        {
+            "fees_domestic": "5970",
+            "publish": "true",
+            "location": {
+                "value": "Kensington",
+                "cl_id": "6a49b4034f4d97404aa6eb4f0310c79b",
+                "key": "name"
+            },
+            "name": "Summer Term 2020",
+            "clarification_to_appear_in_handbook": "",
+            "display_name": "Offering 02",
+            "teaching_period": {
+                "value": "Summer Term",
+                "cl_id": "b8f53777db7993009c2c403c3a9619e4",
+                "key": "name"
+            },
+            "attendance_mode": {
+                "value": "",
+                "cl_id": null,
+                "key": "description"
+            },
+            "quota_number": "",
+            "study_level": {
+                "label": "Undergraduate",
+                "value": "ugrd"
+            },
+            "self_enrol": "true",
+            "academic_item": {
+                "value": "V1_COMP2521",
+                "cl_id": "ee28e705db57770069fd384f7c961955",
+                "key": "code"
+            },
+            "fees_commonwealth": "1191",
+            "fees_international": "5970",
+            "course_restrictions": "",
+            "cl_id": "6228e705db57770069fd384f7c96195b"
+        },
+        {
+            "fees_domestic": "5970",
+            "publish": "true",
+            "location": {
+                "value": "Kensington",
+                "cl_id": "6a49b4034f4d97404aa6eb4f0310c79b",
+                "key": "name"
+            },
+            "name": "Term 3 2020",
+            "clarification_to_appear_in_handbook": "",
+            "display_name": "Offering 04",
+            "teaching_period": {
+                "value": "Term 3",
+                "cl_id": "601633b7db7993009c2c403c3a9619ab",
+                "key": "name"
+            },
+            "attendance_mode": {
+                "value": "",
+                "cl_id": null,
+                "key": "description"
+            },
+            "quota_number": "",
+            "study_level": {
+                "label": "Undergraduate",
+                "value": "ugrd"
+            },
+            "self_enrol": "true",
+            "academic_item": {
+                "value": "V1_COMP2521",
+                "cl_id": "ee28e705db57770069fd384f7c961955",
+                "key": "code"
+            },
+            "fees_commonwealth": "1191",
+            "fees_international": "5970",
+            "course_restrictions": "",
+            "cl_id": "6628e705db57770069fd384f7c961960"
+        },
+        {
+            "fees_domestic": "5970",
+            "publish": "true",
+            "location": {
+                "value": "Kensington",
+                "cl_id": "6a49b4034f4d97404aa6eb4f0310c79b",
+                "key": "name"
+            },
+            "name": "Term 1 2020",
+            "clarification_to_appear_in_handbook": "",
+            "display_name": "Offering 03",
+            "teaching_period": {
+                "value": "Term 1",
+                "cl_id": "bc067bf7db7993009c2c403c3a961994",
+                "key": "name"
+            },
+            "attendance_mode": {
+                "value": "",
+                "cl_id": null,
+                "key": "description"
+            },
+            "quota_number": "",
+            "study_level": {
+                "label": "Undergraduate",
+                "value": "ugrd"
+            },
+            "self_enrol": "true",
+            "academic_item": {
+                "value": "V1_COMP2521",
+                "cl_id": "ee28e705db57770069fd384f7c961955",
+                "key": "code"
+            },
+            "fees_commonwealth": "1191",
+            "fees_international": "5970",
+            "course_restrictions": "",
+            "cl_id": "ea28e705db57770069fd384f7c96195d"
+        }
+    ],
+    "academic_calendar_tooltip": "",
+    "academic_item_type": "Course",
+    "no_enrolment": "false",
+    "offering_detail": {
+        "key": "ugrd",
+        "fees": {
+            "fees_commonwealth_link": {
+                "label": "Commonwealth Supported Students (if applicable)",
+                "value": "https://student.unsw.edu.au/fees-student-contribution-rates"
+            },
+            "fees_commonwealth": "1191",
+            "fees_domestic_link": {
+                "label": "Domestic Students",
+                "value": "https://student.unsw.edu.au/fees-domestic-full-fee-paying"
+            },
+            "fees_domestic": "5970",
+            "fees_international_link": {
+                "label": "International Students",
+                "value": "https://student.unsw.edu.au/fees-international"
+            },
+            "fees_international": "5970"
+        },
+        "offering_terms": "Term 2, Term 3, Term 1",
+        "fees_table": "<table id=\"unswfeestable\" class=\"unswfeestable\"><thead><tr><th>Type</th><th>Amount</th></tr></thead><tbody><tr><td><a target=\"_blank\" class=\"unswlinkvariant_fee\" href=\"https://student.unsw.edu.au/fees-student-contribution-rates\">Commonwealth Supported Students (if applicable)</a></td><td><span tabindex=\"0\">$1191</span></td></tr><tr><td><a target=\"_blank\" class=\"unswlinkvariant_fee\" href=\"https://student.unsw.edu.au/fees-domestic-full-fee-paying\">Domestic Students</a></td><td><span tabindex=\"0\">$5970</span></td></tr><tr><td><a target=\"_blank\" class=\"unswlinkvariant_fee\" href=\"https://student.unsw.edu.au/fees-international\">International Students</a></td><td><span tabindex=\"0\">$5970</span></td></tr></tbody></table>",
+        "erg": [],
+        "campus": {
+            "name": "Kensington"
+        }
+    },
+    "additional_information": "This course is offered as General Education.",
+    "study_level_tooltip": "Undergraduate: A level of study that leads to the award of a Diploma, Advanced Diploma, Associate Degree or a Bachelor Degree (pass or honours).",
+    "campus": "Kensington",
+    "study_level_single": {
+        "label": "Undergraduate",
+        "value": "ugrd"
+    },
+    "code": "COMP2521",
+    "attributes": [],
+    "credit_points_header": "6 Units of Credit",
+    "eqivalents": [],
+    "exclusion": [
+        {
+            "dependent_type": {
+                "label": null,
+                "value": null
+            },
+            "ai_cl_id": {
+                "value": "V1_COMP2521",
+                "cl_id": "ee28e705db57770069fd384f7c961955",
+                "key": "code"
+            },
+            "association_type": {
+                "label": "Exclusions",
+                "value": "10"
+            },
+            "association_desc": "",
+            "associated_ai_cl_id": {
+                "value": "V1_COMP1927",
+                "cl_id": "e98ce3f3db8f730069fd384f7c96199d",
+                "key": "code"
+            },
+            "cl_id": "0925fb22db299410358b403c3a961964",
+            "assoc_credit_points": "6",
+            "assoc_active": "true",
+            "assoc_title": "Computing 2",
+            "assoc_cl_id": "e98ce3f3db8f730069fd384f7c96199d",
+            "assoc_short_title": "COMP1927 - Computing 2",
+            "assoc_campus": null,
+            "assoc_url": "/undergraduate/courses/2020/COMP1927",
+            "assoc_class": "Subject",
+            "assoc_award_titles": null,
+            "assoc_state": "show",
+            "assoc_award_single": "",
+            "assoc_code": "COMP1927",
+            "assoc_class_translated_subjects": "Course",
+            "assoc_faculty": "Faculty of Engineering",
+            "assoc_class_translated": "Subject",
+            "assoc_duration_hb_display": "0 ",
+            "assoc_current_version": {},
+            "links": []
+        }
+    ],
+    "search_title": "COMP2521 - Data Structures and Algorithms",
+    "description": "<p>The goal of this course is to deepen students&#39; understanding of data structures and algorithms and how these can be employed effectively in the design of software systems. We anticipate that it will generally be taken in the second year of a program, but since its only pre-requisite is COMP1511, is it possible to take it in first year. It is an important course in covering a range of core data structures and algorithms that will be used in context in later courses.</p><br /><p><strong>Topics:</strong><br /> An introduction the structure, analysis and usage of a range of fundamental data types and the core algorithms that operate on them, including: algorithm analysis, sorting, searching, trees, graphs, files, algorithmic strategies, analysis and measurement of programs. Labs and programming assignments in C, using a range of Unix tools.</p>",
+    "hb_assessments": {
+        "message": "Cannot read property \"length\" from undefined",
+        "fileName": "x_f5sl_cl_rest_api_field_mapping.a5ef7594db659c10ad972ed34496198d.script",
+        "sourceName": "x_f5sl_cl_rest_api_field_mapping.a5ef7594db659c10ad972ed34496198d.script",
+        "lineNumber": 130,
+        "name": "TypeError",
+        "stack": "\tat x_f5sl_cl_rest_api_field_mapping.a5ef7594db659c10ad972ed34496198d.script:130 (getArrayValues)\n\tat x_f5sl_cl_rest_api_field_mapping.a5ef7594db659c10ad972ed34496198d.script:72\n\tat sys_script_include.d7a5c712dbcf00507f4f8a264a96191f.script:1115 (anonymous)\n\tat sys_script_include.d7a5c712dbcf00507f4f8a264a96191f.script:1084 (anonymous)\n\tat sys_script_include.d7a5c712dbcf00507f4f8a264a96191f.script:933 (anonymous)\n\tat sys_script_include.d7a5c712dbcf00507f4f8a264a96191f.script:900 (anonymous)\n\tat sys_script_include.d7a5c712dbcf00507f4f8a264a96191f.script:496 (anonymous)\n\tat sys_script_include.d7a5c712dbcf00507f4f8a264a96191f.script:1678 (anonymous)\n\tat sys_script_include.a5dfd245db9144107f4f8a264a961919.script:436 (anonymous)\n\tat <refname>:46\n",
+        "rhinoException": {}
+    },
+    "inactive_course_alert": null,
+    "timetableURL": "http://timetable.unsw.edu.au/2020/COMP2521.html",
+    "subject_sample_text_staticcontent": "To access course outline, please visit:",
+    "links": []
+}

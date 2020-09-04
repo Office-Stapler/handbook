@@ -56,11 +56,12 @@ def get_handbook_details(query, level):
     url = prefix + API_SUFFIX + query.upper()
     handbook_URL = f"https://www.handbook.unsw.edu.au/{level}/courses/2020/"
     rq = requests.get(url)
-    print(rq.json())
     full = rq.json()["contentlets"]
     if len(full) == 0:
-        if level != 'postgraduate':
+        if level == 'undergraduate':
             return get_handbook_details(query, 'postgraduate')
+        elif level == "postgraduate":
+            return get_handbook_details(query, "research")
         raise InvalidRequestException("Invalid course code")
     
     details = json.loads(full[0]["data"])
@@ -103,14 +104,11 @@ def search(query):
 
     if faculty_code not in SUBJECT_INFO["faculties"]:
         return None
-    
-    if query not in [subject["code"] for subject in subjects[faculty_code]]:
-        return [subject["code"] for subject in subjects[faculty_code]]
 
     try:
         name, overview, offering, url, prereq = get_handbook_details(query, 'undergraduate')
     except InvalidRequestException:
-        return []
+        return [subject["code"] for subject in subjects[faculty_code]]
 
     return {
         'overview': overview,
@@ -121,4 +119,4 @@ def search(query):
     }
 
 if __name__ == '__main__':
-    print(get_handbook_details("ZZBU6503", "postgraduate"))
+    print(search("ACCT5001"))
