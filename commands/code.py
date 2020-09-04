@@ -5,10 +5,6 @@ import requests
 SUBJECT_INFO = {}
 
 API_SUFFIX = '%20+unsw_psubject.implementationYear:2020%20+unsw_psubject.code:'
-PGRAD_API = "https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:postgraduate%20+unsw_psubject.implementationYear:2020%20+unsw_psubject.code:"
-
-UGRAD_URL = "https://www.handbook.unsw.edu.au/undergraduate/courses/2020/"
-PGRAD_URL = 'https://www.handbook.unsw.edu.au/postgraduate/courses/2020/'
 
 
 class InvalidRequestException(Exception):
@@ -57,8 +53,10 @@ def get_handbook_details(query, level):
         tuple: (name, overview, offering, url, prereqs)
     """
     prefix = f"https://www.handbook.unsw.edu.au/api/content/render/false/query/+contentType:unsw_psubject%20+unsw_psubject.studyLevelURL:{level}"
-    url = prefix + API_SUFFIX + query.upper() 
+    url = prefix + API_SUFFIX + query.upper()
+    handbook_URL = f"https://www.handbook.unsw.edu.au/{level}/courses/2020/"
     rq = requests.get(url)
+    print(rq.json())
     full = rq.json()["contentlets"]
     if len(full) == 0:
         if level != 'postgraduate':
@@ -77,7 +75,7 @@ def get_handbook_details(query, level):
     terms.sort()
 
     prereqs = find_prereq(details["enrolment_rules"])
-    return (name, overview, ", ".join(terms), UGRAD_URL + query, prereqs)
+    return (name, overview, ", ".join(terms), handbook_URL + query, prereqs)
 
 def search(query):
     ''' 
@@ -123,4 +121,4 @@ def search(query):
     }
 
 if __name__ == '__main__':
-    print(search("comp2521"))
+    print(get_handbook_details("ZZBU6503", "postgraduate"))
