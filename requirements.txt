@@ -14,6 +14,6 @@ pkg-resources==0.0.0
 requests==2.23.0
 soupsieve==2.0
 typing-extensions==3.7.4.2
-urllib3==1.25.9
+urllib3==1.26.5
 websockets==8.1
 yarl==1.4.2
